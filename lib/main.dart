@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:adv_basic/my_app.dart';
+import 'package:adv_basic/quiz.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const Quiz());
 }
