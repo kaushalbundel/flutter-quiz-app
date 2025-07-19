@@ -33,7 +33,9 @@ class _MyApp extends State<MyApp> {
           ),
           const SizedBox(height: 40),
           ElevatedButton.icon(
-            onPressed: () { screenChange()},
+            onPressed: () {
+              widget.screenChange;
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 2, 50, 90),
               side: const BorderSide(color: Colors.white),
