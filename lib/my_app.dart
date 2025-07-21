@@ -2,18 +2,14 @@ import 'package:flutter/material.dart';
 
 // As the button is click the questions will change; this change will have to be
 // incorporated in some kind of state. Hence, the state is captured in statefulwidget
-class MyApp extends StatefulWidget {
+
+// changed the widget to a statelesswidget. The reason was that the starting page(which this page represented) does not has any state based elements. What this means is
+// that the usage of Statefulwidget in this context was unnecessary.
+class MyApp extends StatelessWidget {
   const MyApp(this.screenChange, {super.key});
 
   final void Function() screenChange;
 
-  @override
-  State<MyApp> createState() {
-    return _MyApp();
-  }
-}
-
-class _MyApp extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -33,9 +29,8 @@ class _MyApp extends State<MyApp> {
           ),
           const SizedBox(height: 40),
           ElevatedButton.icon(
-            onPressed: () {
-              widget.screenChange;
-            },
+            onPressed:
+                screenChange, // LLM hallucinated at this point as the function added here is excluded from the call back (){} and just used as it is.
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 2, 50, 90),
               side: const BorderSide(color: Colors.white),

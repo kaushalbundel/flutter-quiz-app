@@ -12,17 +12,12 @@ class Quiz extends StatefulWidget {
 }
 
 class _Quiz extends State<Quiz> {
-  Widget? activeScreen;
-
-  @override
-  void initState() {
-    super.initState();
-    activeScreen = MyApp(switchScreen);
-  }
+  var _activeScreen = "start_screen";
 
   void switchScreen() {
+    // switch screen state change method just changes the active screen string, instead of changing the widget directly in earlier iterations
     setState(() {
-      activeScreen = const QuestionsScreen();
+      _activeScreen = "questions_screen";
     });
   }
 
@@ -30,6 +25,11 @@ class _Quiz extends State<Quiz> {
   Widget build(context) {
     // This is the main widget that drives different screen running on the app
     // The primary screens are starting screen and question/answers screen and then the results screen
+
+    final screenWidget = _activeScreen == "start_screen"
+        ? MyApp(switchScreen)
+        : const QuestionsScreen();
+
     return MaterialApp(
       home: Scaffold(
         body: Container(
@@ -37,7 +37,7 @@ class _Quiz extends State<Quiz> {
             color: Color.fromARGB(255, 2, 50, 90),
           ),
           // This is displaying the starting screen
-          child: activeScreen,
+          child: screenWidget,
         ),
       ),
     );
