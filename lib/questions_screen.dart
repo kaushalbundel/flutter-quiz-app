@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:adv_basic/answer_button.dart';
 import 'package:adv_basic/data/questions.dart';
+// font change using external package
+import 'package:google_fonts/google_fonts.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({super.key});
@@ -12,11 +14,18 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreen extends State<QuestionsScreen> {
-  // using the data that we have hardcoded
-  final currentQuestion = questions[0];
+  var currentQuestionIndex = 0;
+
+  void changeQuestionIndex() {
+    setState(() {
+      currentQuestionIndex += 1;
+    });
+  }
 
   @override
   Widget build(context) {
+    final currentQuestion = questions[currentQuestionIndex];
+
     return Container(
       margin: const EdgeInsets.all(40),
       child: Center(
@@ -27,12 +36,19 @@ class _QuestionsScreen extends State<QuestionsScreen> {
           children: [
             Text(
               currentQuestion.questions,
-              style: const TextStyle(color: Colors.white),
+              style: GoogleFonts.lato(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 40),
             ...currentQuestion.getShuffledList().map((answer) {
-              return AnswerButton(answerText: answer, onTap: () {});
+              return AnswerButton(
+                answerText: answer,
+                onTap: changeQuestionIndex,
+              );
             }),
           ],
         ),
