@@ -1,0 +1,1 @@
+- Do object and dynamic types can be interchanged?
