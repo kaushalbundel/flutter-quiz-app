@@ -18,6 +18,13 @@ class _Quiz extends State<Quiz> {
 
   var _activeScreen = "start_screen";
 
+  void switchToStartScreen() {
+    setState(() {
+      selectedAnswers = [];
+      _activeScreen = "questions_screen";
+    });
+  }
+
   void switchScreen() {
     // switch screen state change method just changes the active screen string, instead of changing the widget directly in earlier iterations
     setState(() {
@@ -44,7 +51,10 @@ class _Quiz extends State<Quiz> {
         : QuestionsScreen(onSelectedAnswers: addAnswers);
 
     if (_activeScreen == "results-screen") {
-      screenWidget = ResultsScreen(chosenAnswers: selectedAnswers);
+      screenWidget = ResultsScreen(
+        chosenAnswers: selectedAnswers,
+        switchScreen: switchToStartScreen,
+      );
     }
 
     return MaterialApp(

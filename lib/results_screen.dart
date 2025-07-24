@@ -4,7 +4,13 @@ import 'package:adv_basic/data/questions.dart';
 import 'package:adv_basic/results_summary.dart';
 
 class ResultsScreen extends StatelessWidget {
-  const ResultsScreen({super.key, required this.chosenAnswers});
+  const ResultsScreen({
+    super.key,
+    required this.chosenAnswers,
+    required this.switchScreen,
+  });
+
+  final void Function() switchScreen;
 
   final List<String> chosenAnswers;
 
@@ -28,21 +34,36 @@ class ResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var summaryData = getSummaryData();
+    final int numTotalQuestions = questions.length;
+    final int numCorrectQuestions = summaryData.where((data) {
+      return data['user_answer'] == data['correct_answer'];
+    }).length;
+
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            "This is the summary Text",
-            style: GoogleFonts.lato(color: Colors.white),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 40),
-          ResultsSummary(getSummaryData()),
-          const SizedBox(height: 40),
-          TextButton(onPressed: () {}, child: const Text("Restart Quiz")),
-        ],
+      child: SizedBox(
+        width: 300,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              "You have answered $numCorrectQuestions correct questions, out of $numTotalQuestions total questions.",
+              style: GoogleFonts.lato(color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 40),
+            ResultsSummary(summaryData),
+            const SizedBox(height: 40),
+            OutlinedButton(
+              onPressed: switchScreen,
+              child: const Text(
+                "Restart Quiz",
+                style: TextStyle(color: Colors.amber),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

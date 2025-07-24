@@ -1,1 +1,5 @@
 - Do object and dynamic types can be interchanged?
+- How do we change the screen from the results screen to the start screen?
+    As we set the on tap function, we can add a function to the result screen widget, which then passes this function to the quiz widget, in quiz widget this change is captured and screen is changed.
+
+    - But how this will work in terms of state change using strings?
