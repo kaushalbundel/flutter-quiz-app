@@ -14,7 +14,7 @@ class ResultsScreen extends StatelessWidget {
     // Question: How this list will be executed? Is this a function as it needs execution of is this a plain List of Map?
     // New Learning: Basically, we can pass either a function or a data to the widget. The data passing part is fine for the function, we just pass a function to the child widget which then computes the data.
     final List<Map<String, Object>> summaryData = [];
-    for (var i = 0; i <= chosenAnswers.length; i++) {
+    for (var i = 0; i < chosenAnswers.length; i++) {
       summaryData.add({
         "question_index":
             i + 1, // to populate this information on the summary widget
